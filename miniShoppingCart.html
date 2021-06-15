@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Mini Shopping cart</title>
+    <style>
+        .breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}
+        </style>
+</head>
+<body onload="cart()">
+    
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid" style="padding-left: 75%;">
+  
+       
+          <form class="d-flex">
+            <input class="form-control " type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-info" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    <div class="container my-4">
+        <h4>Featured Product</h4>
+    </diV>
+
+    </div>
+
+    <div class="container my-4 border border-dark">
+        <diV class="row" id ="test">
+
+        </diV>
+
+    </div>
+    <div class="container my-4">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+               
+                <li class="breadcrumb-item active">Cart</li>
+            </ol>
+        </nav>
+        <h1><b>My Cart</b></h1>
+    </diV>
+    <div class="container my-4 border border-dark">
+        <table class="table table-striped" id="table_1">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Item Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="container my-4">
+        <a href="#"  onclick="EmptyCart()">Empty Cart</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+
+</body>
+<script>
+    let obj = {};
+    const items = [
+        
+        {
+            "name": "Product3",
+            "price": "700 PKR",
+            "srcI": "https://source.unsplash.com/500x400/?water Bottle",
+            "tag": "on Sale",
+        },
+        {
+            "name": "Product4",
+            "price": "800 PKR",
+            "srcI": "https://source.unsplash.com/500x400/?Keys",
+            "tag": "on Sale",
+        },
+        {
+            "name": "Product4",
+            "price": "900 PKR",
+            "srcI": "https://source.unsplash.com/500x400/?NoteBook",
+            "tag": "on Sale",
+
+        },
+        {
+            "name": "Product5",
+            "price": "1000 PKR",
+            "srcI": "https://source.unsplash.com/500x400/?Pencil",
+            "tag": "New Arrival",
+
+        },
+        {
+            "name": "Product6",
+            "price": "500 PKR",
+            "srcI": "https://source.unsplash.com/500x400/?Bottle",
+            "tag": "30 % OFF",
+        },
+        {
+            "name": "Product7",
+            "price": "500 PKR",
+            "srcI": "https://source.unsplash.com/500x400/?Pen",
+            "tag": "on Sale",
+
+        },];
+    localStorage.setItem("items", JSON.stringify(items)); //store colors
+    var storedItems = JSON.parse(localStorage.getItem("items")); //get them back
+    //console.log(storedItems);
+
+    function cart() {
+        let i = 0;
+        for (i = 0; i < items.length; i++) {
+            str = "<div class='col-md-4' id='id_" + (i + 1) + "'>";
+            str += "<div class='p-3 align-self-center' id='tid'><h7 class='card-title' class='text-center' style='background-color:#FCAE1E;margin-left:35px;'>" + 'Special Offer' + "</h7></div> <div class='p-2 align-self-end'>";
+            str += "<div class='card-body'><div class='d-flex' style='width:18rem;'><div class='p-2 align-self-start'>";
+            str += "<a href='#' class='btn btn-warning' style ='width:15%; height:10%;' onclick=\"removeItem('id_" + (i + 1) + "')\">-</a></div>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;";
+            str += "<a href='#' class='btn btn-primary' onclick=\"addToCart(document.getElementById('id_" + (i + 1) + "'))\">+</a></div></div>";
+            str += "<div class='card' style='width: 16rem;'><img src=" + storedItems[i].srcI + " class='card-img-top' alt='...' id='img_1'></div> <div class='container'>";
+            str += "<div class='p-2 align-self-center' id='tid'><h5 class='card-title' class='text-center'>" + storedItems[i].name + "</h5></div> <div class='p-2 align-self-end'>";
+                str += "<h3>&ensp;<label>" + storedItems[i].tag + "</label></h3> </div></div></diV>";
+                str += "<h4>Price:&ensp;<label>" + storedItems[i].price + "</label></h4> </div></div></diV>";
+                       document.querySelector("#test").innerHTML += str;
+        }
+    }
+
+    function addToCart(a) {
+        let name = a.querySelector("h5").innerHTML;
+        let im = a.querySelector("img").getAttribute("src");
+        let price = a.querySelector("h4 label").innerHTML;
+        let iD = a.getAttribute("id");
+        if (iD in obj) {
+            add(obj[iD]);
+        }
+        else {
+            obj[iD] = iD + "1";
+            let val = document.getElementById("table_1");
+            let str = "<tr id='" + obj[iD] + "'><td><img src=" + im + " class='card-img-top' alt='...' id='img_1' style='width: 4rem;'>" + "</td><td>" + name + "</td><td>";
+            str += "<div class='d-flex' style='width:18rem;'><div class='p-2 align-self-start'><a href='#' class='btn btn-warning  onclick=\"removeItem('" + iD + "')\">-</a></div><div class='p-2 align-self-center'><label class='label text-dark Quant'>1</label></div><div class='p-2 align-self-end'><a href='#' class='btn btn-info ' onclick=\"add('" + obj[iD] + "')\">+</a></div><div class='p-2 align-self-start'><a href='#' class='btn btn-warning  onclick=\"delete('" + iD + "')\">Delete</a></div></div></td><td><label class='price'>" + price + "</label></td><td><label class='total'>" + price + "</label></td></tr>";
+            val.innerHTML += str;
+
+        }
+    }
+
+    function add(iD) {
+        let el = document.getElementById(iD);
+        let quant = el.querySelector(".Quant");
+        let num = parseInt(quant.innerHTML);
+        quant.innerHTML = num + 1;
+        let price = el.querySelector('.price');
+        let total = el.querySelector('.total')
+        total.innerHTML = parseInt(price.innerHTML) * parseInt(quant.innerHTML);
+     
+    }
+
+    function removeItem(iD) {
+        if (iD in obj) {
+            let el = document.getElementById(obj[iD]);
+            let quant = el.querySelector(".Quant");
+            let num = parseInt(quant.innerHTML);
+            quant.innerHTML = num - 1;
+            let price = el.querySelector('.price');
+            let total = el.querySelector('.total')
+            total.innerHTML = parseInt(total.innerHTML) - parseInt(price.innerHTML);
+            if (parseInt(total.innerHTML) == 0) {
+                el.remove();
+                delete obj[iD];
+            }
+        }
+    }
+function dlt(){
+}
+    function EmptyCart() {
+        for (const [key, value] of Object.entries(obj)) {
+            let el = document.getElementById(value);
+            el.remove();
+            delete obj[key];
+        }
+    }
+</script>
+</html>
